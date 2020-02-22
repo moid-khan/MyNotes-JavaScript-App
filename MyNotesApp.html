@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MyNotes App</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #fffef2;
+      }
+      .Heading {
+        font-family: "Raleway";
+      }
+      .form-control,
+      .btn,
+      #alert {
+        width: 300px;
+      }
+      #alert {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <center>
+        <h1 class="Heading mt-3">MyNotes</h1>
+        <br />
+        <div class="alert alert-danger" id="alert" role="alert">
+          Please fill these input fields!
+        </div>
+        <div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Note Heading"
+            id="txtNoteHeading"
+          />
+          <br />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Note Content"
+            id="txtNoteContent"
+          />
+          <br />
+          <input
+            type="button"
+            id="InsertNote"
+            class="btn btn-primary"
+            onClick="addNote()"
+            value="Add Note"
+          />
+        </div>
+      </center>
+    </div>
+    <br />
+    <div class="container">
+      <div class="row" id="row"></div>
+    </div>
+
+    <script type="text/javascript">
+      //Get textbox Data
+      var txtNoteHeading = document.getElementById("txtNoteHeading");
+      var txtNoteContent = document.getElementById("txtNoteContent");
+
+      //Get Element to Insert Data
+      var noteHeading = document.getElementById("NoteHeading");
+      var noteContent = document.getElementById("NoteContent");
+
+      //Get Row which is inside the Container
+      var row = document.getElementById("row");
+
+      //Get Alert Element for Condition
+      var alert = document.getElementById("alert");
+
+      //Dynamic Variable for Note Count
+      var noteCount = 1;
+
+      function addNote() {
+        if (txtNoteHeading.value != "" && txtNoteContent.value != "") {
+          row.innerHTML +=
+            "<div class='col-md-4 mt-3'><div class='card shadow border' style='background-color: #f6f8e8'><div class='card-body'><label>Note No." +
+            noteCount +
+            "</label><h2 id='NoteHeading'>" +
+            txtNoteHeading.value +
+            "</h2><hr><p id='NoteContent'>" +
+            txtNoteContent.value +
+            "</p></div></div></div>";
+
+          alert.style.display = "none";
+          noteCount++;
+
+          txtBoxClear(txtNoteHeading.value, txtNoteContent.value);
+        } else {
+          alert.style.display = "block";
+        }
+      }
+
+      function txtBoxClear() {
+        txtNoteHeading.value = "";
+        txtNoteContent.value = "";
+      }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
